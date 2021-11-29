@@ -16,6 +16,8 @@ public class HomePage {
     private final By findOutMoreButton = By.cssSelector("#button-find-out-more");
     private final By findModalCloseButton = By.cssSelector("#myModal .modal-footer button:nth-child(2)");
 
+    private final By productsMenu = By.cssSelector(".container-fluid ul.nav.navbar-nav li a[href=\"products.html\"]");
+
     // Acciones sobre Homepage
     public void clickFindOutMoreButton() throws InterruptedException {
         driver.findElement(findOutMoreButton).click();
@@ -29,5 +31,10 @@ public class HomePage {
     public void closeModal() throws InterruptedException {
         driver.findElement(findModalCloseButton).click();
         Thread.sleep(1000);
+    }
+
+    public OurProductsPage clickOurProductsMenu() {
+        driver.findElement(productsMenu).click();
+        return new OurProductsPage(driver);
     }
 }

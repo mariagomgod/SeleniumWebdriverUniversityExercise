@@ -18,6 +18,8 @@ public class HomePage {
 
     private final By productsMenu = By.cssSelector(".container-fluid ul.nav.navbar-nav li a[href=\"products.html\"]");
 
+    private final By contactUsMenu = By.cssSelector(".container-fluid ul.nav.navbar-nav li a[href=\"../Contact-Us/contactus.html\"]");
+
     // Acciones sobre Homepage
     public void clickFindOutMoreButton() throws InterruptedException {
         driver.findElement(findOutMoreButton).click();
@@ -36,5 +38,10 @@ public class HomePage {
     public OurProductsPage clickOurProductsMenu() {
         driver.findElement(productsMenu).click();
         return new OurProductsPage(driver);
+    }
+
+    public ContactUsPage clickContactMenu() {
+        driver.findElement(contactUsMenu).click();
+        return new ContactUsPage(driver);
     }
 }

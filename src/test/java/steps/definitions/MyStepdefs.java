@@ -7,12 +7,16 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.ContactFormThankYouPage;
+import pages.ContactUsPage;
 import pages.HomePage;
 import pages.OurProductsPage;
 
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class MyStepdefs {
 
@@ -49,7 +53,7 @@ public class MyStepdefs {
     }
 
     @When("I click on Our Products Menu")
-    public void iClickOurProductsMenu() throws  InterruptedException {
+    public void iClickOurProductsMenu() {
         homePage.clickOurProductsMenu();
     }
 
@@ -86,6 +90,33 @@ public class MyStepdefs {
         OurProductsPage ourProducts = new OurProductsPage(driver);
         WebElement modal = ourProducts.findModal();
         assertFalse(modal.isDisplayed());
+    }
+
+    @When("I click on Our Contact Link")
+    public void iClickOnOurContactLink() {
+        homePage.clickContactMenu();
+    }
+
+    @When("I fill the form")
+    public void iFillTheForm() {
+        ContactUsPage contactUsPage = new ContactUsPage(driver);
+        contactUsPage.setFirstNameField("María");
+        contactUsPage.setLastNameField("Gómez");
+        contactUsPage.setEmailField("test@gmail.com");
+        contactUsPage.setCommentsField("Text");
+    }
+
+    @When("I click the submit button")
+    public void iClickTheSubmitButton() {
+        ContactUsPage contactUsPage = new ContactUsPage(driver);
+        contactUsPage.clickSubmitButton();
+    }
+
+    @Then("a message is displayed")
+    public void aMessageIsDisplayed() {
+        ContactFormThankYouPage contactFormThankYouPage = new ContactFormThankYouPage(driver);
+        String message = contactFormThankYouPage.getMessage();
+        assertEquals(message, "Thank You for your Message!");
     }
 
     @After()
